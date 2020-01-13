@@ -14,3 +14,6 @@
 Route::get('/', function () {
     return view('app');
 });
+
+Route::get('/ideas', 'IdeaController@index');
+Route::post('/ideas', 'IdeaController@store');
