@@ -1975,7 +1975,8 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {
       ideas: [],
-      error: []
+      error: [],
+      newIdea: ''
     };
   },
   methods: {
@@ -1994,6 +1995,23 @@ __webpack_require__.r(__webpack_exports__);
         _this.ideas = response.data;
       })["catch"](function (error) {
         _this.error = error.response.data;
+      });
+    },
+    // Almacenar una registro de tipo Idea -- Controller@store
+    createIdea: function createIdea() {
+      var _this2 = this;
+
+      var URL = '/ideas';
+      axios.post(URL, {
+        'description': this.newIdea
+      }).then(function (response) {
+        _this2.getIdeas();
+
+        _this2.newIdea = '';
+        toastr__WEBPACK_IMPORTED_MODULE_0___default.a.success(response.data.message, 'Información del sistema');
+      })["catch"](function (error) {
+        _this2.error = error.response.data;
+        toastr__WEBPACK_IMPORTED_MODULE_0___default.a.error(error.response.data.errors.description, 'Advertencia del sistema');
       });
     }
   },
@@ -56114,7 +56132,61 @@ var render = function() {
     _c("div", { staticClass: "card mt-4 mb-4" }, [
       _vm._m(0),
       _vm._v(" "),
-      _vm._m(1),
+      _c("div", { staticClass: "card-body" }, [
+        _c(
+          "form",
+          {
+            on: {
+              submit: function($event) {
+                $event.preventDefault()
+                return _vm.createIdea($event)
+              }
+            }
+          },
+          [
+            _c("div", { staticClass: "input-group input-group-sm mt-3 mb-3" }, [
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.newIdea,
+                    expression: "newIdea"
+                  }
+                ],
+                staticClass: "form-control",
+                attrs: { type: "text" },
+                domProps: { value: _vm.newIdea },
+                on: {
+                  input: function($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.newIdea = $event.target.value
+                  }
+                }
+              }),
+              _vm._v(" "),
+              _c("div", { staticClass: "input-group-append" }, [
+                _c(
+                  "button",
+                  {
+                    staticClass: "btn btn-primary",
+                    attrs: { type: "submit" },
+                    on: {
+                      click: function($event) {
+                        $event.preventDefault()
+                        return _vm.createIdea($event)
+                      }
+                    }
+                  },
+                  [_vm._v("Agregar")]
+                )
+              ])
+            ])
+          ]
+        )
+      ]),
       _vm._v(" "),
       _c("div", { staticClass: "card-footer" }, [
         _c(
@@ -56145,29 +56217,6 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "card-header" }, [
       _c("h4", [_vm._v("¿En qué estas pensando?")])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "card-body" }, [
-      _c("form", { attrs: { action: "#" } }, [
-        _c("div", { staticClass: "input-group input-group-sm mt-3 mb-3" }, [
-          _c("input", {
-            staticClass: "form-control",
-            attrs: { type: "text", name: "description" }
-          }),
-          _vm._v(" "),
-          _c("div", { staticClass: "input-group-append" }, [
-            _c(
-              "button",
-              { staticClass: "btn btn-primary", attrs: { type: "submit" } },
-              [_vm._v("Agregar")]
-            )
-          ])
-        ])
-      ])
     ])
   }
 ]

@@ -6,11 +6,11 @@
               <h4>¿En qué estas pensando?</h4>
           </div>
           <div class="card-body">
-              <form action="#">
+              <form @submit.prevent="createIdea">
                   <div class="input-group input-group-sm mt-3 mb-3">
-                      <input type="text" name="description" class="form-control">
+                      <input type="text" v-model="newIdea" class="form-control">
                       <div class="input-group-append">
-                          <button type="submit" class="btn btn-primary">Agregar</button>
+                          <button type="submit" class="btn btn-primary" @click.prevent="createIdea">Agregar</button>
                       </div>
                   </div>
               </form>
@@ -40,6 +40,7 @@ export default {
     return {
       ideas: [],
       error: [],
+      newIdea: '',
     }
   },
   methods: {
@@ -59,6 +60,19 @@ export default {
         this.error = error.response.data;
       });
     },
+
+    // Almacenar una registro de tipo Idea -- Controller@store
+    createIdea() {
+      const URL = '/ideas';
+      axios.post(URL, {'description': this.newIdea}).then(response => {
+        this.getIdeas();
+        this.newIdea = '';
+        toast.success(response.data.message, 'Información del sistema');
+      }).catch(error => {
+        this.error = error.response.data;
+        toast.error(error.response.data.errors.description, 'Advertencia del sistema');
+      });
+    }
   },
   created() {
     this.getIdeas();
