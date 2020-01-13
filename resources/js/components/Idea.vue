@@ -8,7 +8,7 @@
           <div class="card-body">
               <form @submit.prevent="createIdea">
                   <div class="input-group input-group-sm mt-3 mb-3">
-                      <input type="text" v-model="newIdea" class="form-control">
+                      <input type="text" v-model="newIdea" class="form-control" placeholder="Ingrese la descripción de la tarea">
                       <div class="input-group-append">
                           <button type="submit" class="btn btn-primary" @click.prevent="createIdea">Agregar</button>
                       </div>
@@ -33,6 +33,9 @@
 // Modulos o librerías importadas de forma local - solo para este componente
 import toast from 'toastr';
 import moment from 'moment';
+
+// Configurar idioma español - librería moment.js
+moment.lang('es')
 
 export default {
   name: 'Idea',

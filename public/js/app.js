@@ -1969,7 +1969,9 @@ __webpack_require__.r(__webpack_exports__);
 //
 // Modulos o librerías importadas de forma local - solo para este componente
 
+ // Configurar idioma español - librería moment.js
 
+moment__WEBPACK_IMPORTED_MODULE_1___default.a.lang('es');
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'Idea',
   data: function data() {
@@ -56155,7 +56157,10 @@ var render = function() {
                   }
                 ],
                 staticClass: "form-control",
-                attrs: { type: "text" },
+                attrs: {
+                  type: "text",
+                  placeholder: "Ingrese la descripción de la tarea"
+                },
                 domProps: { value: _vm.newIdea },
                 on: {
                   input: function($event) {
