@@ -19,7 +19,7 @@
               <ul class="list-unstyled">
                   <li v-for="idea in ideas" :key="idea.id">
                       <span class="text-muted mr-1">
-                        <em>{{ idea.created_at }}</em>
+                        <em>{{ since(idea.created_at) }}</em>
                       </span>
                       {{ idea.description }}
                   </li>
@@ -30,6 +30,10 @@
 </template>
 
 <script>
+// Modulos o librerías importadas de forma local - solo para este componente
+import toast from 'toastr';
+import moment from 'moment';
+
 export default {
   name: 'Idea',
   data() {
@@ -39,6 +43,11 @@ export default {
     }
   },
   methods: {
+    // Formatear fechas para humanos
+    since(date) {
+      return moment(date).fromNow();
+    },
+
     // Recuperar todas los registros de tipo Idea -- Controller@index
     getIdeas() {
       const URL = '/ideas';

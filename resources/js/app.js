@@ -6,9 +6,11 @@
 
 require("./bootstrap");
 
-// Frameworks y librerías de JavaScript
+// Frameworks y librerías de JavaScript inyectadas en el objeto window -- (disponibles desde consola)
 window.Vue = require("vue");
-window.toastr = require("toastr");
+
+// Módulos o librerías importadas de forma global -- para toda la aplicación/componentes Vue
+// import toast from "toastr";
 
 /**
  * The following block of code may be used to automatically register your
