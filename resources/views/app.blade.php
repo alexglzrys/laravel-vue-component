@@ -4,6 +4,15 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
+        <!--  
+            En versiones anteriores de Vue, era necesario inyectar el csrf_token en una
+            etiqueta meta para inyectarla en las cabeceras HTTP de la petición de Axios
+            mediante el uso de jQuery.
+            Ahora esto no es necesario, ya que laravel generera el mismo token y lo guarda
+            de forma implicita a través de una Cookie. La cual se envia en todas las peticiones
+            al servidor.
+        -->
+
         <title>Laravel - Vue Components</title>
 
         <!-- Fonts CDN -->

@@ -30,12 +30,18 @@
 </template>
 
 <script>
+/**
+ * Nota importante: Al finalizar el proyecto, es necesario compilar nuestros assets en modo producción.
+ *                  De hacer caso omiso, Vue nos notificará por consola que se encuentra en modo desarrollo
+ *                  comando: npm run production
+ */
+
 // Modulos o librerías importadas de forma local - solo para este componente
 import toast from 'toastr';
 import moment from 'moment';
 
 // Configurar idioma español - librería moment.js
-moment.lang('es')
+moment.locale('es')
 
 export default {
   name: 'Idea',
