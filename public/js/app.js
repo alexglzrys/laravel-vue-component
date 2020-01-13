@@ -1961,8 +1961,34 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
-  name: 'Idea'
+  name: 'Idea',
+  data: function data() {
+    return {
+      ideas: [],
+      error: []
+    };
+  },
+  methods: {
+    // Recuperar todas los registros de tipo Idea -- Controller@index
+    getIdeas: function getIdeas() {
+      var _this = this;
+
+      var URL = '/ideas'; // Axios es agregado por Laravel de forma global al objeto window. -- scaffolding
+      // No es necesario importarlo de forma local en este componente mediante -- import axios from 'axios'
+
+      axios.get(URL).then(function (response) {
+        _this.ideas = response.data;
+      })["catch"](function (error) {
+        _this.error = error.response.data;
+      });
+    }
+  },
+  created: function created() {
+    this.getIdeas();
+  }
 });
 
 /***/ }),
@@ -38464,50 +38490,65 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
+  return _c("div", [
+    _c("h1", { staticClass: "text-center title" }, [
+      _vm._v("Captura tus ideas")
+    ]),
+    _vm._v(" "),
+    _c("div", { staticClass: "card mt-4 mb-4" }, [
+      _vm._m(0),
+      _vm._v(" "),
+      _vm._m(1),
+      _vm._v(" "),
+      _c("div", { staticClass: "card-footer" }, [
+        _c(
+          "ul",
+          { staticClass: "list-unstyled" },
+          _vm._l(_vm.ideas, function(idea) {
+            return _c("li", { key: idea.id }, [
+              _c("span", { staticClass: "text-muted mr-1" }, [
+                _c("em", [_vm._v(_vm._s(idea.created_at))])
+              ]),
+              _vm._v(
+                "\n                    " +
+                  _vm._s(idea.description) +
+                  "\n                "
+              )
+            ])
+          }),
+          0
+        )
+      ])
+    ])
+  ])
 }
 var staticRenderFns = [
   function() {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", [
-      _c("h1", { staticClass: "text-center title" }, [
-        _vm._v("Captura tus ideas")
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "card mt-4" }, [
-        _c("div", { staticClass: "card-header" }, [
-          _c("h4", [_vm._v("¿En qué estas pensando?")])
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "card-body" }, [
-          _c("form", { attrs: { action: "#" } }, [
-            _c("div", { staticClass: "input-group input-group-sm mt-3 mb-3" }, [
-              _c("input", {
-                staticClass: "form-control",
-                attrs: { type: "text", name: "description" }
-              }),
-              _vm._v(" "),
-              _c("div", { staticClass: "input-group-append" }, [
-                _c(
-                  "button",
-                  { staticClass: "btn btn-primary", attrs: { type: "submit" } },
-                  [_vm._v("Agregar")]
-                )
-              ])
-            ])
-          ])
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "card-footer" }, [
-          _c("ul", { staticClass: "list-unstyled" }, [
-            _c("li", [
-              _c("span", { staticClass: "text-muted mr-1" }, [
-                _c("em", [_vm._v("Hace un momento")])
-              ]),
-              _vm._v("\n                    Mi nueva idea\n                ")
-            ])
+    return _c("div", { staticClass: "card-header" }, [
+      _c("h4", [_vm._v("¿En qué estas pensando?")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "card-body" }, [
+      _c("form", { attrs: { action: "#" } }, [
+        _c("div", { staticClass: "input-group input-group-sm mt-3 mb-3" }, [
+          _c("input", {
+            staticClass: "form-control",
+            attrs: { type: "text", name: "description" }
+          }),
+          _vm._v(" "),
+          _c("div", { staticClass: "input-group-append" }, [
+            _c(
+              "button",
+              { staticClass: "btn btn-primary", attrs: { type: "submit" } },
+              [_vm._v("Agregar")]
+            )
           ])
         ])
       ])
