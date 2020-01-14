@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1 class="text-center title">Captura tus ideas</h1>
+    <h1 class="text-center title"><i class="fas fa-lightbulb"></i> Captura tus ideas</h1>
       <div class="card mt-4 mb-4">
           <div class="card-header">
               <h4>¿En qué estas pensando?</h4>
@@ -8,9 +8,9 @@
           <div class="card-body">
               <form @submit.prevent="createIdea">
                   <div class="input-group input-group-sm mt-3 mb-3">
-                      <input type="text" v-model="newIdea" class="form-control" placeholder="Ingrese la descripción de la tarea">
+                      <input type="text" v-model="newIdea" class="form-control" placeholder="Ingrese la descripción de la idea">
                       <div class="input-group-append">
-                          <button type="submit" class="btn btn-primary" @click.prevent="createIdea">Agregar</button>
+                          <button type="submit" class="btn btn-primary" @click.prevent="createIdea"><i class="fas fa-plus-circle"></i> Agregar</button>
                       </div>
                   </div>
               </form>
@@ -19,7 +19,7 @@
               <ul class="list-unstyled">
                   <li v-for="idea in ideas" :key="idea.id">
                       <span class="text-muted mr-1">
-                        <em>{{ since(idea.created_at) }}</em>
+                        <strong>{{ since(idea.created_at) }}</strong> - 
                       </span>
                       {{ idea.description }}
                   </li>
@@ -92,5 +92,9 @@ export default {
 <style scoped>
   .title {
     margin: 1rem 0;
+  }
+  strong {
+    color: teal;
+    text-transform: capitalize;
   }
 </style>
